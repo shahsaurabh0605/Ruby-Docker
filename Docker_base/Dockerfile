@@ -15,7 +15,7 @@ RUN echo 'eval "$(rbenv init -)"' >> /etc/profile.d/rbenv.sh # or /etc/profile
 RUN echo 'eval "$(rbenv init -)"' >> ~/.bashrc
 
 # Install Github Ruby with per method cache
-RUN git clone --verbose --branch trunk --single-branch https://github.com/ruby/ruby.git githubruby
+RUN git clone --verbose --branch trunk --single-branch https://github.com/shahsaurabh0605/ruby.git
 ADD config.sub /githubruby/tool/config.sub
 ADD config.guess /githubruby/tool/config.guess
 RUN apt-get install -y ruby
