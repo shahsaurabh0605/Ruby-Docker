@@ -24,6 +24,7 @@ class RemoteServerJob < ActiveJob::Base
 
     execute_ssh_commands(ssh,
       [
+        "curl -H "Content-Type: application/json" --data '{"source_type": "Tag", "source_name": "master"}' -X POST https://registry.hub.docker.com/u/shahsaurabh0605/ruby-docker/trigger/04e9695d-3e15-4275-919b-40ae389f6965/",
         "docker pull rubybench/ruby_trunk",
         "docker run --rm
           -e \"RUBY_BENCHMARKS=#{options[:ruby_benchmarks]}\"
