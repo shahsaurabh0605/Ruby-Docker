@@ -1,0 +1,10 @@
+sudo: required
+
+services:
+  - docker
+
+script:
+  - sed -i "s_FROM.*_FROM rubybench/ruby:$(previous commit)_" ./Dockerfile
+  - docker tag $(docker build . | tail -n 1 | cut -d' ' -f 3) $rubybench/ruby:$(latest commit)
+  - docker login -e $DOCKERHUB_EMAIL -u $DOCKERHUB_USER -p $DOCKERHUB_PASSWORD
+  - docker push rubybench/ruby
