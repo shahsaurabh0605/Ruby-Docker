@@ -19,5 +19,5 @@ RUN git clone --verbose --branch trunk --single-branch https://github.com/shahsa
 ADD config.sub /githubruby/tool/config.sub
 ADD config.guess /githubruby/tool/config.guess
 RUN apt-get install -y ruby
-RUN cd githubruby && git reset --hard HEAD~2000 && autoconf && ./configure --disable-install-doc && make && make install
+RUN cd githubruby && git reset --hard HEAD~1 && autoconf && ./configure --disable-install-doc && make && make install
 
