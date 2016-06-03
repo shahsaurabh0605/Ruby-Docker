@@ -3,8 +3,12 @@ sudo: required
 services:
   - docker
 
+before_install:
+  - apt-get install curl
+  - apt-get install jq
+
 script:
-  - sed -i "s_FROM.*_FROM rubybench/ruby:$(previous commit)_" ./Dockerfile
-  - docker tag $(docker build . | tail -n 1 | cut -d' ' -f 3) $rubybench/ruby:$(latest commit)
+  - sed -i "s_FROM.*_FROM rubybench/ruby:$(curl -s -S "https://registry.hub.docker.com/v2/repositories/rubybench/ruby/tags/" | jq '."results"[]["name"]'| sed -n 1p |cut -c2-8)_" ./Dockerfile
+  - docker tag $(docker build . | tail -n 1 | cut -d' ' -f 3) $rubybench/ruby:$(git ls-remote https://github.com/tgxworld/ruby trunk | cut -c1-7)
   - docker login -e $DOCKERHUB_EMAIL -u $DOCKERHUB_USER -p $DOCKERHUB_PASSWORD
   - docker push rubybench/ruby
