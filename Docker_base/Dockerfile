@@ -14,6 +14,8 @@ ENV PATH /root/.rbenv/bin:$PATH
 RUN echo 'eval "$(rbenv init -)"' >> /etc/profile.d/rbenv.sh # or /etc/profile
 RUN echo 'eval "$(rbenv init -)"' >> ~/.bashrc
 
+RUN git clone --verbose --branch master --single-branch https://github.com/ruby-bench/ruby-bench-suite.git
+
 # Install Github Ruby with per method cache
 RUN git clone --verbose --branch trunk --single-branch https://github.com/shahsaurabh0605/ruby.git githubruby
 ADD config.sub /githubruby/tool/config.sub
