@@ -4,8 +4,8 @@ services:
   - docker
 
 before_install:
-  - apt-get install curl
-  - apt-get install jq
+  - sudo apt-get install curl
+  - sudo apt-get install jq
 
 script:
   - sed -i "s_FROM.*_FROM rubybench/ruby:$(curl -s -S "https://registry.hub.docker.com/v2/repositories/rubybench/ruby/tags/" | jq '."results"[]["name"]'| sed -n 1p |cut -c2-8)_" ./Dockerfile
